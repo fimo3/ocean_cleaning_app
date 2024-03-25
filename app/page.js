@@ -1,9 +1,7 @@
-import Image from "next/image";
+import React from "react";
 
-export default function Home() {
-  return (
-    <div>
-      <p>Pew</p>
-    </div>
-  );
-}
+const Dashboard = () => {
+  return <div>Dashboard</div>;
+};
+
+export default Dashboard;
