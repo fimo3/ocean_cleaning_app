@@ -13,6 +13,7 @@ module.exports = {
       "secondary-hover": "#ECFEE8",
       bluey: "#85D6FF",
       "default-text": "#ffffff",
+      black: "#000000",
     },
   },
   plugins: [],

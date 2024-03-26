@@ -9,8 +9,8 @@ h4,
 p {
   @apply font-bold text-default-text p-2;
 }
-p.email {
-  @apply text-bluey p-0;
+.email {
+  @apply text-black p-0;
 }
 h1 {
   @apply text-4xl;

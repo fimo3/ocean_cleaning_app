@@ -3,7 +3,9 @@ import React from "react";
 const Dashboard = () => {
   return (
     <div>
-      <h1 className="text-default-text pb-5 pl-10 pt-10">Dashboard</h1>
+      <h1 className="pb-5 pt-10 justify-center">
+        Welcome to Expanding our horizon
+      </h1>
       <hr className="text-bluey" />
       <p className="p-2">Hello! :)</p>
     </div>
