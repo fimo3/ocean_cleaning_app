@@ -3,12 +3,12 @@ import React from "react";
 import Image from "next/image";
 const DonationCard = () => {
   return (
-    <div>
-      <Image src="@/app/images/img1.png" alt="Hello World" />
-      <h1>Title</h1>
-      <p>Description.......</p>
+    <div className="m-2 text-black rounded-2xl bg-secondary hover:bg-secondary-hover">
+      <h2 class="card">Title</h2>
+      <p class="card">Description.......</p>
       <hr />
-      <button>Donate</button>
+      <p class="card">35$ from 60$</p>
+      <button class="card">Donate</button>
     </div>
   );
 };
