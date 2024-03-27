@@ -17,7 +17,7 @@ p.card {
   @apply font-bold text-black p-2;
 }
 button {
-  @apply border-bluey border-2 rounded-3xl bg-bluey hover:bg-bluey-hover;
+  @apply rounded-3xl bg-bluey hover:bg-bluey-hover;
 }
 .email {
   @apply text-black p-0;

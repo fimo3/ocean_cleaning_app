@@ -15,6 +15,8 @@ module.exports = {
       "bluey-hover": "#5D95B2",
       "default-text": "#ffffff",
       black: "#000000",
+      red: "#ff3d3d",
+      "red-hover": "#a32727",
     },
   },
   plugins: [],
