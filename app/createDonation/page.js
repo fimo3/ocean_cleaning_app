@@ -1,4 +1,4 @@
-import DonationForm from "@/app/(components)/DonationForm";
+import DonationForm from "@/app/(components)/CreateDonationForm";
 
 const Donation = () => {
   return (

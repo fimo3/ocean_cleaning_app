@@ -8,7 +8,7 @@ const DonationCard = () => {
       <p class="card">Description.......</p>
       <hr />
       <p class="card">35$ from 60$</p>
-      <button class="card">Donate</button>
+      <button className="p-1 m-2">Donate</button>
     </div>
   );
 };

@@ -12,6 +12,7 @@ module.exports = {
       "primary-hover": "#00527A",
       "secondary-hover": "#ECFEE8",
       bluey: "#85D6FF",
+      "bluey-hover": "#5D95B2",
       "default-text": "#ffffff",
       black: "#000000",
     },
