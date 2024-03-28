@@ -4,8 +4,11 @@ import payMethodsCard from "./payMethodsCard";
 const DonationForm = () => {
   return (
     <div className="flex justify-center">
-      <form className="flex flex-col gap-3 w-1/2" method="post">
-        <h3>Donation</h3>
+      <form
+        className="flex flex-col gap-3 w-1/2 bg-secondary rounded-lg mt-20"
+        method="post"
+      >
+        <h3 class="card">Donation</h3>
         <label>Title: </label>
         <input id="title" name="title" type="text" required={true} />
         <label>Description: </label>

@@ -21,9 +21,11 @@ const DonationPage = () => {
             cursus arcu. Cras sodales risus vel arcu iaculis, sed scelerisque
             diam consectetur.
           </p>
-          <button className="m-5 border border-solid border-base-500 rounded-lg py-2 px-5 bg-secondary hover:bg-secondaryDark">
-            Donate
-          </button>
+          <a href="#">
+            <button className="m-5 border border-solid border-base-500 rounded-lg py-2 px-5 bg-secondary hover:bg-secondaryDark">
+              Donate now!
+            </button>
+          </a>
         </div>
       </div>
     </div>
