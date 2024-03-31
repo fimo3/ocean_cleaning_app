@@ -2,7 +2,6 @@ let mapX,
   mapY = 0;
 let map_of_the_world = tryToLoad("map_of_the_world", "black");
 let pin = tryToLoad("pin", "red");
-
 function update() {}
 function drawPin(x, y) {
   drawImage(pin, x - 10, y - 30, 20, 30);
