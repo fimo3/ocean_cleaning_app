@@ -21,14 +21,14 @@ const DonationForm = () => {
     const res = await fetch("/api/Donations", {
       method: "POST",
       body: JSON.stringify({ formData }),
+      //@ts-ignore
       "content-type": "application/json",
     });
 
     if (!res.ok) {
       throw new Error("Failed to create a new donation. :(");
     }
-
-    router.refresh();
+    +router.refresh();
     router.push("/");
   };
   const startingDonationData = {
