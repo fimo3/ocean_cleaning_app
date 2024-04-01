@@ -2,6 +2,22 @@ import DonationCard from "../(components)/DonationCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
+const getDonations = async () => {
+  try {
+    const res = await fetch("http://localhost:3000/api/Tickets", {
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch topics");
+    }
+
+    return res.json();
+  } catch (error) {
+    console.log("Error loading topics: ", error);
+  }
+};
+
 const page = () => {
   return (
     <div className="p-5">
