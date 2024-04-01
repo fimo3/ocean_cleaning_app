@@ -1,5 +1,6 @@
 let map_of_the_world = tryToLoad("map_of_the_world", "black");
 let pin = tryToLoad("pin", "red");
+let boo = false;
 let pins = [];
 let pos = [
   [50, 250], //yes
@@ -33,5 +34,24 @@ function draw() {
   drawImage(map_of_the_world, 0, 0, 900, 600);
   for (var k = 0; k <= 12; k++) {
     drawPin(pos[pins[k].x][0], pos[pins[k].y][1]);
+  }
+}
+function mouseup() {
+  for (var k = 0; k <= 12; k++) {
+    if (
+      areColliding(
+        mouseX,
+        mouseY,
+        1,
+        1,
+        pos[pins[k].x][0] - 10,
+        pos[pins[k].y][1] - 30,
+        20,
+        30
+      )
+    ) {
+      console.log("pinche");
+      boo = true;
+    }
   }
 }

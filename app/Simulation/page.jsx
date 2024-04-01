@@ -8,11 +8,7 @@ const game = () => {
       <iframe
         width="1000"
         height="1000"
-        src="https://fimo155.free.bg/Tuesfest/game/"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
+        src="https://fimo155.free.bg"
         allowfullscreen
       ></iframe>
     </div>
