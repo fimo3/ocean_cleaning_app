@@ -3,7 +3,11 @@ let pin = tryToLoad("pin", "red");
 let pins = [];
 let fishX = 10;
 let fishDirection = 1;
+let randSpeed = randomInteger(5) + 1;
 let horizon = false;
+let bokluk = tryToLoad("bokluk", "black");
+let boklukY = 300;
+let dfloat = 0.1;
 let pos = [
   [50, 250], //yes
   [500, 50], //yes
@@ -145,10 +149,26 @@ for (var k = 0; k <= 12; k++) {
   rand = randomInteger(12);
 }
 function update() {
+  boklukY += dfloat;
+  console.log(dfloat);
+  if (boklukY <= 250) {
+    dfloat += 0.2;
+    console.log(dfloat);
+  } else if (boklukY >= 300) {
+    dfloat -= 0.2;
+    console.log(dfloat);
+  }
   if (fishDirection == 1) {
-    fishX += 4;
+    fishX += randSpeed;
+    for (var i = 1; i < 4; i++) {
+      randSpeed = i;
+    }
   } else {
-    fishX -= 4;
+    randSpeed = randomInteger(4) + 1;
+    fishX -= randSpeed;
+    for (var i = 1; i < 4; i++) {
+      randSpeed = i;
+    }
   }
   if (fishX <= 0) {
     fishDirection = 1;
@@ -178,6 +198,7 @@ function draw() {
     context.restore();
     step += 1;
     drawFish(fishX, 400, 20, 20);
+    drawImage(bokluk, 300, boklukY, 200, 100);
   }
 }
 function mouseup() {
