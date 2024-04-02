@@ -1,6 +1,8 @@
 let map_of_the_world = tryToLoad("map_of_the_world", "black");
 let pin = tryToLoad("pin", "red");
 let pins = [];
+let fishX = 10;
+let fishDirection = 1;
 let horizon = false;
 let pos = [
   [50, 250], //yes
@@ -133,15 +135,7 @@ function spirograph() {
 }
 var step = -4;
 var drawFish = (x, y, w, h) => {
-  context.strokeStyle = "black";
-  context.beginPath();
-  context.fillStyle = "green";
-  context.moveTo(x, y);
-  context.lineTo(x, y + w);
-  context.lineTo(x + (1 / 4) * w, y);
-  context.closePath();
-  context.stroke();
-  context.fill();
+  drawImage(pin, x, y, w, h);
 };
 let isMouseColliding = (x, y, w, h) => {
   return areColliding(mouseX, mouseY, 1, 1, x, y, w, h);
@@ -150,7 +144,18 @@ for (var k = 0; k <= 12; k++) {
   pins[k] = new Hocation();
   rand = randomInteger(12);
 }
-function update() {}
+function update() {
+  if (fishDirection == 1) {
+    fishX += 4;
+  } else {
+    fishX -= 4;
+  }
+  if (fishX <= 0) {
+    fishDirection = 1;
+  } else if (fishX >= 880) {
+    fishDirection = 0;
+  }
+}
 function drawPin(x, y) {
   context.fillText(x + ", " + y, x, y);
   drawImage(pin, x - 10, y - 30, 20, 30);
@@ -172,7 +177,7 @@ function draw() {
     plotSine3(context, step - 200, 50);
     context.restore();
     step += 1;
-    drawFish(80, 80, 20, 20);
+    drawFish(fishX, 400, 20, 20);
   }
 }
 function mouseup() {
