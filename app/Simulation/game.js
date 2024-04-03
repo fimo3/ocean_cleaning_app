@@ -177,11 +177,14 @@ function update() {
   }
 }
 function drawPin(x, y) {
-  context.fillText(x + ", " + y, x, y);
   drawImage(pin, x - 10, y - 30, 20, 30);
 }
 function draw() {
   drawImage(map_of_the_world, 0, 0, 900, 600);
+  context.font = "bold 25px cursive";
+  context.fillStyle = "black";
+  context.fillText("Day 1", 0, 0);
+  context.font = "bold 10px cursive";
   for (var k = 0; k <= 12; k++) {
     drawPin(pos[pins[k].x][0], pos[pins[k].y][1]);
 
@@ -219,14 +222,57 @@ function draw() {
     drawFish(fishX, 400, 20, 20);
     drawImage(bokluk, 300, boklukY, 200, 120);
   }
+  var line = (startX, startY, endX, endY) => {
+    context.beginPath();
+    context.moveTo(startX, startY);
+    context.lineTo(endX, endY);
+    context.closePath();
+    context.stroke();
+  };
   if (boklukBattle) {
     context.fillStyle = "#92d3ed";
     context.fillRect(0, 0, 900, 600);
-    context.fillStyle = "yellow";
+    line(450, 0, 450, 400);
+    context.fillStyle = "#D3A96C";
     context.fillRect(0, 400, 900, 300);
-    drawFish(100, 200, 100, 200);
-    drawImage(bokluk, 500, 200, 200, 100);
+    drawFish(100, 200, 100, 150);
+    drawImage(bokluk, 600, 200, 200, 120);
+    var j = 0;
+    for (var i = 1; i <= 6; i++) {
+      context.fillStyle = "#ba6e00";
+      if (i % 3 == 1) {
+        j++;
+        context.fillRect(j * 215 - 200, 415, 200, 50);
+      } else if (i % 3 == 2) {
+        context.fillRect(215 * j - 200, 480, 200, 50);
+      } else {
+        context.fillRect(j * 215 - 200, 545, 200, 50);
+      }
+    }
+    for (var i = 1; i <= 6; i++) {
+      context.fillStyle = "#ba6e00";
+      if (i % 3 == 1) {
+        j++;
+        context.fillRect(j * 215 - 180, 415, 200, 50);
+      } else if (i % 3 == 2) {
+        context.fillRect(215 * j - 180, 480, 200, 50);
+      } else {
+        context.fillRect(j * 215 - 180, 545, 200, 50);
+      }
+    }
+    context.fillStyle = "black";
+    context.font = "bold 25px cursive";
+    context.fillText("Net slap", 20, 430, 100);
+    context.fillStyle = "red";
+    context.fillText("30 dm", 135, 430, 100);
+    context.fillStyle = "black";
+    context.fillText("one-scoop-style", 235, 430, 100);
+    context.fillStyle = "red";
+    context.fillText("15 dm", 350, 430, 100);
+    context.fillStyle = "black";
   }
+  context.fillStyle = "white";
+  context.fillRect(900, 0, 300, 1000);
 }
 function mouseup() {
   if (isMouseColliding(0, 0, 50, 50)) {
