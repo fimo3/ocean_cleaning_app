@@ -6,8 +6,11 @@ let fishDirection = 1;
 let randSpeed = randomInteger(5) + 1;
 let horizon = false;
 let bokluk = tryToLoad("bokluk", "black");
-let boklukY = 300;
+let boklukY = 190;
 let dfloat = 0.1;
+let pinMenu = false;
+let boklukBattle = false;
+let isBokluk = true;
 let pos = [
   [50, 250], //yes
   [500, 50], //yes
@@ -112,7 +115,7 @@ function plotSine3(context, xOffset) {
   var height = context.canvas.height;
   context.beginPath();
   context.lineWidth = 10;
-  context.strokeStyle = "blue";
+  context.strokeStyle = "#3366ff";
   var x = 0;
   var y = 0;
   var amplitude = 20;
@@ -150,13 +153,10 @@ for (var k = 0; k <= 12; k++) {
 }
 function update() {
   boklukY += dfloat;
-  console.log(dfloat);
-  if (boklukY <= 250) {
-    dfloat += 0.2;
-    console.log(dfloat);
-  } else if (boklukY >= 300) {
-    dfloat -= 0.2;
-    console.log(dfloat);
+  if (boklukY <= 200) {
+    dfloat += 0.01;
+  } else if (boklukY >= 220) {
+    dfloat -= 0.01;
   }
   if (fishDirection == 1) {
     fishX += randSpeed;
@@ -184,21 +184,48 @@ function draw() {
   drawImage(map_of_the_world, 0, 0, 900, 600);
   for (var k = 0; k <= 12; k++) {
     drawPin(pos[pins[k].x][0], pos[pins[k].y][1]);
+
+    if (
+      isMouseColliding(pos[pins[k].x][0] - 10, pos[pins[k].y][1] - 30, 20, 30)
+    ) {
+      context.fillStyle = "#D3A96C";
+      context.fillRect(pos[pins[k].x][0], pos[pins[k].y][1], 200, 155);
+      context.strokeStyle = "#ad5700";
+      context.strokeRect(pos[pins[k].x][0], pos[pins[k].y][1], 200, 155);
+      context.fillStyle = "black";
+      context.fillText("Pin", pos[pins[k].x][0] + 5, pos[pins[k].y][1] + 5);
+      context.fillText(
+        "has garbage",
+        pos[pins[k].x][0] + 5,
+        pos[pins[k].y][1] + 12
+      );
+      console.log("pinMenu");
+    } else {
+      pinMenu = false;
+    }
   }
   if (horizon) {
-    context.fillStyle = "white";
+    context.fillStyle = "#92d3ed";
     context.fillRect(0, 0, 900, 600);
     context.fillStyle = "#0033cc";
     context.fillRect(0, 300, 900, 300);
     drawX(0, 0, 50, 50);
     context.save();
-    plotSine(context, step, 50);
-    plotSine2(context, step - 100, 50);
-    plotSine3(context, step - 200, 50);
+    plotSine(context, step);
+    plotSine2(context, step - 100);
+    plotSine3(context, step - 200);
     context.restore();
     step += 1;
     drawFish(fishX, 400, 20, 20);
-    drawImage(bokluk, 300, boklukY, 200, 100);
+    drawImage(bokluk, 300, boklukY, 200, 120);
+  }
+  if (boklukBattle) {
+    context.fillStyle = "#92d3ed";
+    context.fillRect(0, 0, 900, 600);
+    context.fillStyle = "yellow";
+    context.fillRect(0, 400, 900, 300);
+    drawFish(100, 200, 100, 200);
+    drawImage(bokluk, 500, 200, 200, 100);
   }
 }
 function mouseup() {
@@ -211,5 +238,8 @@ function mouseup() {
     ) {
       horizon = true;
     }
+  }
+  if (isMouseColliding(300, boklukY, 200, 120) && isBokluk && horizon) {
+    boklukBattle = true;
   }
 }
