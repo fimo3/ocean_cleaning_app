@@ -6,6 +6,7 @@ let fishDirection = 1;
 let randSpeed = randomInteger(5) + 1;
 let horizon = false;
 let bokluk = tryToLoad("bokluk", "black");
+let fish = tryToLoad("fish", "blue");
 let boklukY = 190;
 let dfloat = 0.1;
 let pinMenu = false;
@@ -142,7 +143,7 @@ function spirograph() {
 }
 var step = -4;
 var drawFish = (x, y, w, h) => {
-  drawImage(pin, x, y, w, h);
+  drawImage(fish, x, y, w, h);
 };
 let isMouseColliding = (x, y, w, h) => {
   return areColliding(mouseX, mouseY, 1, 1, x, y, w, h);
@@ -235,8 +236,16 @@ function draw() {
     line(450, 0, 450, 400);
     context.fillStyle = "#D3A96C";
     context.fillRect(0, 400, 900, 300);
-    drawFish(100, 200, 100, 150);
+    drawFish(100, 200, 200, 140);
+    context.fillStyle = "#66ff99";
+    context.fillRect(100, 190, 200, 10);
+    context.fillStyle = "#0099ff";
+    context.fillRect(100, 170, 200, 10);
     drawImage(bokluk, 600, 200, 200, 120);
+    context.fillStyle = "#66ff99";
+    context.fillRect(600, 190, 200, 10);
+    context.fillStyle = "#0099ff";
+    context.fillRect(600, 170, 200, 10);
     var j = 0;
     for (var i = 1; i <= 6; i++) {
       context.fillStyle = "#ba6e00";
@@ -270,6 +279,7 @@ function draw() {
     context.fillStyle = "red";
     context.fillText("15 dm", 350, 430, 100);
     context.fillStyle = "black";
+    context.fillText("VS", 435, 15);
   }
   context.fillStyle = "white";
   context.fillRect(900, 0, 300, 1000);
