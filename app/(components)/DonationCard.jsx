@@ -7,10 +7,10 @@ const DonationCard = () => {
   return (
     <div className="m-2 text-black rounded-2xl bg-secondary hover:bg-secondary-hover">
       <Image src={img1} alt="Снимка :>" className="p-4 w-auto" />
-      <h2 class="card">Title</h2>
-      <p class="card">Description.......</p>
+      <h2 id="card">Title</h2>
+      <p id="card">Description.......</p>
       <hr />
-      <p class="card">35$ from 60$</p>
+      <p id="card">35$ from 60$</p>
       <div
         className="bg-default-text rounded-full h-2.5 m-2"
         style={{ width: "90%" }}

@@ -8,7 +8,7 @@ const Nav = () => {
       </div>
       <div className="flex items-center space-x-4">
         <Link href="../../Donation">Donate</Link>
-        <p class="email">john.doe@email.com</p>
+        <p id="email">john.doe@email.com</p>
       </div>
     </nav>
   );

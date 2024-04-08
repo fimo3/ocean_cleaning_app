@@ -7,6 +7,7 @@ let randSpeed = randomInteger(5) + 1;
 let horizon = false;
 let bokluk = tryToLoad("bokluk", "black");
 let fish = tryToLoad("fish", "blue");
+let slash = tryToLoad("slash", "white");
 let boklukY = 190;
 let dfloat = 0.1;
 let pinMenu = false;
@@ -180,6 +181,9 @@ function update() {
 function drawPin(x, y) {
   drawImage(pin, x - 10, y - 30, 20, 30);
 }
+function drawGarbage(x, y, w, h) {
+  drawImage(bokluk, x, y, w, h);
+}
 function draw() {
   drawImage(map_of_the_world, 0, 0, 900, 600);
   context.font = "bold 25px cursive";
@@ -220,8 +224,8 @@ function draw() {
     plotSine3(context, step - 200);
     context.restore();
     step += 1;
-    drawFish(fishX, 400, 20, 20);
-    drawImage(bokluk, 300, boklukY, 200, 120);
+    drawFish(fishX, 400, 35, 20);
+    drawGarbage(300, boklukY, 200, 120);
   }
   var line = (startX, startY, endX, endY) => {
     context.beginPath();
@@ -236,12 +240,12 @@ function draw() {
     line(450, 0, 450, 400);
     context.fillStyle = "#D3A96C";
     context.fillRect(0, 400, 900, 300);
-    drawFish(100, 200, 200, 140);
+    drawFish(100, 200, 245, 140);
     context.fillStyle = "#66ff99";
     context.fillRect(100, 190, 200, 10);
     context.fillStyle = "#0099ff";
     context.fillRect(100, 170, 200, 10);
-    drawImage(bokluk, 600, 200, 200, 120);
+    drawGarbage(600, 200, 200, 120);
     context.fillStyle = "#66ff99";
     context.fillRect(600, 190, 200, 10);
     context.fillStyle = "#0099ff";

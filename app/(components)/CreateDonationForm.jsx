@@ -45,7 +45,7 @@ const DonationForm = () => {
         method="post"
         onSubmit={handleSubmit}
       >
-        <h3 class="card">Cause</h3>
+        <h3 id="card">Cause</h3>
         <label>Title: </label>
         <input
           id="title"
