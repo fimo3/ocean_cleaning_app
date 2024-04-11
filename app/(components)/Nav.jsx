@@ -11,29 +11,43 @@ import {
   faUserAlt,
   faUserAltSlash,
 } from "@fortawesome/free-solid-svg-icons";
+import Tooltip from "./Tooltip";
+import TooltipLastChild from "./TooltipLastChild";
 const Nav = () => {
   return (
     <nav className="flex justify-between bg-secondary p-4">
       <div className="flex items-center space-x-4">
         <Link href="/">
-          <FontAwesomeIcon icon={faHome} />
+          <Tooltip message={"Home"}>
+            <FontAwesomeIcon icon={faHome} />
+          </Tooltip>
         </Link>
         <Link href="../../Simulation">
-          <FontAwesomeIcon icon={faGamepad} />
+          <Tooltip message={"Game"}>
+            <FontAwesomeIcon icon={faGamepad} />
+          </Tooltip>
         </Link>
         <Link href="../../Blog">
-          <FontAwesomeIcon icon={faSquareRss} />
+          <Tooltip message={"Blog"}>
+            <FontAwesomeIcon icon={faSquareRss} />
+          </Tooltip>
         </Link>
         <Link href="../../Shop">
-          <FontAwesomeIcon icon={faShoppingCart} />
+          <Tooltip message={"Shop"}>
+            <FontAwesomeIcon icon={faShoppingCart} />
+          </Tooltip>
         </Link>
       </div>
       <div className="flex items-center space-x-4">
         <Link href="../../Donation">
-          <FontAwesomeIcon icon={faCircleDollarToSlot} />
+          <Tooltip message={"Donate"}>
+            <FontAwesomeIcon icon={faCircleDollarToSlot} />
+          </Tooltip>
         </Link>
         <Link href="#">
-          <FontAwesomeIcon icon={faUserAlt} />
+          <TooltipLastChild message={"User"}>
+            <FontAwesomeIcon icon={faUserAlt} />
+          </TooltipLastChild>
         </Link>
       </div>
     </nav>
