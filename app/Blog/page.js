@@ -12,7 +12,7 @@ const Blog = () => {
         <BlogPostCard />
         <BlogPostCard />
         <a href="#Seeall">
-          <h3>See all</h3>
+          <h4>See all</h4>
         </a>
       </div>
     </div>
