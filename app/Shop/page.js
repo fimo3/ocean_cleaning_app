@@ -3,15 +3,17 @@ import ShopCard from "../(components)/ShopCard";
 
 const Shop = () => {
   return (
-    <div className="bg-primary p-3 m-3  rounded-md lg:grid grid-cols-2 xs:grid-cols-1">
-      <h1 className="text-decortion-none underline decoration-secondary decoration-wavy">
+    <div>
+      <h1 className="underline decoration-secondary decoration-wavy rounded-md">
         Shop
       </h1>
-      <ShopCard />
-      <ShopCard />
-      <ShopCard />
-      <ShopCard />
-      <ShopCard />
+      <div className="bg-primary-hover p-3 m-3  rounded-md lg:grid grid-cols-5 ">
+        <ShopCard />
+        <ShopCard />
+        <ShopCard />
+        <ShopCard />
+        <ShopCard />
+      </div>
     </div>
   );
 };
