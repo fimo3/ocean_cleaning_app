@@ -2,14 +2,18 @@ import BlogPostCard from "../(components)/BlogPostCard";
 
 const Blog = () => {
   return (
-    <div className="">
-      <h1>Blog</h1>
+    <div className="p-5">
+      <h1 className="">Blog</h1>
+      <hr className="text-default-text mt-3" />
       <div>
         <BlogPostCard />
       </div>
       <div className="lg:grid grid-cols-2 xs:grid-cols-1 justify-around">
         <BlogPostCard />
         <BlogPostCard />
+        <a href="#Seeall">
+          <p>See all</p>
+        </a>
       </div>
     </div>
   );
