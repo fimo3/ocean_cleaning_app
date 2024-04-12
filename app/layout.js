@@ -4,6 +4,7 @@ import Nav from "./(components)/Nav";
 
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import Footer from "./(components)/Footer";
 
 config.autoAddCss = false;
 const inter = Inter({ subsets: ["latin"] });
@@ -20,6 +21,8 @@ export default function RootLayout({ children }) {
         <div className="flex flex-col h-screen max-h-screen">
           <Nav />
           <div className="flex-grow overflow-y-auto bg-primary">{children}</div>
+
+          <Footer />
         </div>
       </body>
     </html>

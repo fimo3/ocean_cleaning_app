@@ -1,15 +1,12 @@
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCartShopping,
   faCircleDollarToSlot,
   faGamepad,
   faHome,
   faShoppingCart,
   faSquareRss,
-  faUser,
   faUserAlt,
-  faUserAltSlash,
 } from "@fortawesome/free-solid-svg-icons";
 import Tooltip from "./Tooltip";
 import TooltipLastChild from "./TooltipLastChild";
@@ -44,7 +41,7 @@ const Nav = () => {
             <FontAwesomeIcon icon={faCircleDollarToSlot} />
           </Tooltip>
         </Link>
-        <Link href="#">
+        <Link href="../../Profile">
           <TooltipLastChild message={"User"}>
             <FontAwesomeIcon icon={faUserAlt} />
           </TooltipLastChild>
