@@ -1,4 +1,5 @@
 import React from "react";
+import ShopCard from "./(components)/ShopCard";
 
 const Dashboard = () => {
   return (
@@ -18,6 +19,20 @@ const Dashboard = () => {
       </div>
       <p>Next prize: at 100$.</p>
       <hr className="text-bluey" />
+      <h2>Things you can find in the shop this week: </h2>
+      <div className="bg-primary-hover p-3 m-3  rounded-md lg:grid grid-cols-4 ">
+        <ShopCard />
+        <ShopCard />
+        <ShopCard />
+        <div>
+          <h4>And more...</h4>
+          <a href="../../Shop">
+            <p className="text-bluey hover:text-bluey-hover">
+              Take a look at all of them ➡️
+            </p>
+          </a>
+        </div>
+      </div>
     </div>
   );
 };
