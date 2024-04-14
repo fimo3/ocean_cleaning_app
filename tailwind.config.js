@@ -18,6 +18,11 @@ module.exports = {
       red: "#ff3d3d",
       "red-hover": "#a32727",
     },
+    extend: {
+      backgroundImage: {
+        "background-one": "url('/public/kostenurka.png')",
+      },
+    },
   },
   plugins: [],
 };
