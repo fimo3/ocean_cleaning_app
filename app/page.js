@@ -17,6 +17,7 @@ const Dashboard = () => {
         80$ - 80%
       </div>
       <p>Next prize: at 100$.</p>
+      <hr className="text-bluey" />
     </div>
   );
 };
