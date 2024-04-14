@@ -1,14 +1,42 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
+import {
+  faSquareFacebook,
+  faSquareGithub,
+  faSquareInstagram,
+} from "@fortawesome/free-brands-svg-icons";
+import { faSquareEnvelope } from "@fortawesome/free-solid-svg-icons";
 const Footer = () => {
   return (
     <div
       id="card"
-      className="bg-secondary p-3 lg:grid grid-cols-3 xl:grid-cols-2 justify-around"
+      className="mt-10 flex bg-[url('../public/background.gif')] bg-fixed bg-no-repeat bg-cover p-10 justify-around"
     >
-      <a href="#">Instagram</a>
-      <a href="#">Facebook</a>
-      <a href="#">Email</a>
+      <a href="#">
+        <FontAwesomeIcon
+          className="text-[#A0415A] rounded text-3xl"
+          icon={faSquareInstagram}
+        />
+      </a>
+      <a href="#">
+        <FontAwesomeIcon
+          className="text-[#0866FF] rounded text-3xl"
+          icon={faSquareFacebook}
+        />
+      </a>
+      <a href="#">
+        <FontAwesomeIcon
+          className="text-[#bc1919] rounded text-3xl"
+          icon={faSquareEnvelope}
+        />
+      </a>
+      <a href="#">
+        <FontAwesomeIcon
+          className="text-[#000000] rounded text-3xl"
+          icon={faSquareGithub}
+        />
+      </a>
     </div>
   );
 };

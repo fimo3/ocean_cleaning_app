@@ -9,9 +9,14 @@ const profile = () => {
         <Image
           src={UserPicture}
           alt="Снимка :>"
-          className="p-0 object-cover w-20 rounded-3xl"
+          className="m-3 object-cover w-20 h-20 rounded-3xl"
         />
-        <h2 id="card">Username</h2>
+        <div className="lg:grid grid-cols-2 xs:grid-cols-1">
+          <h2 id="card">Username</h2>
+          <a href="#">
+            <button className="p-3">Edit info</button>
+          </a>
+        </div>
         <hr id="card" />
         <h3 id="card">Shopping cart:</h3>
         <ShoppingCartItems />

@@ -9,14 +9,20 @@ import {
   faUserAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import Tooltip from "./Tooltip";
+import Image from "next/image";
+import UserPicture from "@/public/logo.png";
 import TooltipLastChild from "./TooltipLastChild";
 const Nav = () => {
   return (
-    <nav className="flex justify-between bg-secondary p-4">
+    <nav className="flex justify-between bg-secondary bg-[url('../public/background.gif')] bg-fixed bg-no-repeat bg-cover p-4">
       <div className="flex items-center space-x-4">
         <Link href="/">
           <Tooltip message={"Home"}>
-            <FontAwesomeIcon icon={faHome} />
+            <Image
+              src={UserPicture}
+              alt="Снимка :>"
+              className="object-cover w-10"
+            />
           </Tooltip>
         </Link>
         <Link href="../../Simulation">

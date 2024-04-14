@@ -3,10 +3,14 @@ import ShopCard from "../(components)/ShopCard";
 
 const Shop = () => {
   return (
-    <div>
+    <div className="p-4">
       <h1 className="underline decoration-secondary decoration-wavy rounded-md">
         Shop
       </h1>
+      <p>
+        Here you can buy some really cool merch with sea turtles on them and the
+        logo of OceanOvation!!!
+      </p>
       <div className="bg-primary-hover p-3 m-3  rounded-md lg:grid grid-cols-5 ">
         <ShopCard />
         <ShopCard />
