@@ -40,6 +40,11 @@ const Nav = () => {
             <FontAwesomeIcon icon={faShoppingCart} />
           </Tooltip>
         </Link>
+        <Link href="../../Aboutus">
+          <Tooltip message={"About us"}>
+            <FontAwesomeIcon icon={faShoppingCart} />
+          </Tooltip>
+        </Link>
       </div>
       <div className="flex items-center space-x-4">
         <Link href="../../Donation">

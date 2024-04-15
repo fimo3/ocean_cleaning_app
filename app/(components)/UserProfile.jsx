@@ -23,6 +23,9 @@ const profile = () => {
               </a>
             </div>
           </div>
+          <div>
+            <p id="card">email: example@email.com</p>
+          </div>
         </div>
         <hr id="card" />
         <h3 id="card">Shopping cart:</h3>
