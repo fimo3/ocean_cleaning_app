@@ -7,6 +7,7 @@ import {
   faShoppingCart,
   faSquareRss,
   faUserAlt,
+  faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import Tooltip from "./Tooltip";
 import Image from "next/image";
@@ -42,7 +43,7 @@ const Nav = () => {
         </Link>
         <Link href="../../Aboutus">
           <Tooltip message={"About us"}>
-            <FontAwesomeIcon icon={faShoppingCart} />
+            <FontAwesomeIcon icon={faUsers} />
           </Tooltip>
         </Link>
       </div>
