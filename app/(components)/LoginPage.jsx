@@ -9,14 +9,25 @@ const LoginPage = () => {
       >
         <h3 id="card">Log in</h3>
         <label>Username: </label>
-        <input id="username" name="username" type="text" required={true} />
+        <input
+          id="username"
+          placeholder="Chochko123"
+          name="username"
+          type="text"
+          required={true}
+        />
         <label>Password: </label>
-        <input id="password" name="password" required={true} />
+        <input
+          id="password"
+          placeholder="pasword..."
+          name="password"
+          required={true}
+        />
         <button>
           <input type="submit" value="Log in" />
         </button>
         <p>Do not have a profile?</p>
-        <a href="#">Sign up</a>
+        <a href="/Signup">Sign up</a>
       </form>
     </div>
   );
