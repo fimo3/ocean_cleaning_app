@@ -3,6 +3,7 @@ let pin = tryToLoad("pin", "red");
 let pins = [];
 let sunR = 100;
 let life = 100;
+let bokluklife = 100;
 let fishX = 10;
 let fishDirection = 1;
 let randSpeed = randomInteger(5) + 1;
@@ -255,14 +256,15 @@ function draw() {
     drawFish(100, 200, 245, 140);
     context.fillStyle = "#66ff99";
     for (let i = 0; i <= life; i++) {
-      context.fillRect(100 + i, 190, 20, 10);
-      console.log(i);
+      context.fillRect(100 + i * 2, 190, 1, 10);
     }
     context.fillStyle = "#0099ff";
     context.fillRect(100, 170, 200, 10);
     drawGarbage(600, 200, 200, 120);
     context.fillStyle = "#66ff99";
-    context.fillRect(600, 190, 200, 10);
+    for (let i = 0; i <= life; i++) {
+      context.fillRect(600 + i * 2, 190, 1, 10);
+    }
     context.fillStyle = "#0099ff";
     context.fillRect(600, 170, 200, 10);
     var j = 0;
