@@ -4,9 +4,11 @@ let pins = [];
 let sunR = 100;
 let Win = false;
 let Lose = false;
+let turns = 0;
+let boklukStrength = randomInteger(20) * 2;
 let net = tryToLoad("net", "white");
 let life = 100;
-let myTurn = false;
+let myTurn = true;
 let myEndTurn = false;
 let boklukTurn = false;
 let boklukEndTurn = false;
@@ -207,10 +209,29 @@ function update() {
     myTurn = true;
     if (myEndTurn) {
       boklukTurn = true;
+      boklukEndTurn = false;
       myTurn = false;
+      turns++;
     } else if (boklukEndTurn) {
       boklukTurn = false;
+      myEndTurn = false;
       myTurn = true;
+      turns++;
+    }
+  }
+  if (boklukTurn) {
+    boklukStrength = randomInteger(10) * 2;
+    if (boklukmana >= boklukStrength + 15) {
+      mana += boklukStrength / 2;
+      boklukmana -= boklukStrength + 15;
+      life -= boklukStrength;
+      myEndTurn = false;
+      turns++;
+      boklukTurn = false;
+      myTurn = true;
+      console.log(turns);
+    } else {
+      boklukStrength = randomInteger(boklukmana) * 2;
     }
   }
 }
@@ -333,15 +354,21 @@ function draw() {
     context.fillStyle = "black";
     context.fillText("three-scoop-style", 235, 430, 100);
     context.fillStyle = "red";
-    context.fillText("15 dm", 350, 430, 100);
+    context.fillText("10 dm", 350, 430, 100);
     context.fillStyle = "purple";
-    context.fillText("20 mana", 350, 445, 100);
+    context.fillText("10 mana", 350, 445, 100);
     context.fillStyle = "black";
     context.fillText("OP Vacuum", 20, 490, 100);
     context.fillStyle = "red";
     context.fillText("40 dm", 135, 490, 100);
     context.fillStyle = "purple";
     context.fillText("60 mana", 135, 505, 100);
+    context.fillStyle = "black";
+    context.fillText("Cheap attack", 235, 490, 100);
+    context.fillStyle = "red";
+    context.fillText("5 dm", 350, 490, 100);
+    context.fillStyle = "purple";
+    context.fillText("0 mana", 350, 505, 100);
     context.fillStyle = "black";
     context.fillText("VS", 435, 15);
     context.fillStyle = "darkorange";
@@ -374,34 +401,45 @@ function mouseup() {
     boklukBattle = true;
     horizon = false;
   }
-  if (isMouseColliding(15, 415, 200, 50)) {
-    if (mana >= 40) {
-      console.log("Net Slap");
-      bokluklife -= 30;
-      mana -= 40;
-      myEndTurn = true;
-    } else {
-      alert("Not enough mana.");
+  if (boklukBattle) {
+    if (isMouseColliding(15, 415, 200, 50)) {
+      if (mana >= 40) {
+        console.log("Net Slap");
+        bokluklife -= 30;
+        mana -= 40;
+        boklukmana += 15;
+        myEndTurn = true;
+      } else {
+        alert("Not enough mana.");
+      }
     }
-  }
-  if (isMouseColliding(215, 415, 200, 50)) {
-    if (mana >= 20) {
-      console.log("Three-scoop-style");
-      bokluklife -= 15;
-      mana -= 20;
-      myEndTurn = true;
-    } else {
-      alert("Not enough mana.");
+    if (isMouseColliding(215, 415, 200, 50)) {
+      if (mana >= 20) {
+        console.log("Three-scoop-style");
+        bokluklife -= 10;
+        mana -= 10;
+        boklukmana += 5;
+        myEndTurn = true;
+      } else {
+        alert("Not enough mana.");
+      }
     }
-  }
-  if (isMouseColliding(15, 485, 200, 50)) {
-    if (mana >= 60) {
-      console.log("OP Vacuum");
-      bokluklife -= 40;
-      mana -= 60;
+    if (isMouseColliding(15, 485, 200, 50)) {
+      if (mana >= 60) {
+        console.log("OP Vacuum");
+        bokluklife -= 40;
+        mana -= 60;
+        boklukmana += 20;
+        myEndTurn = true;
+      } else {
+        alert("Not enough mana.");
+      }
+    }
+    if (isMouseColliding(215, 485, 200, 50)) {
+      console.log("Cheap attack");
+      bokluklife -= 5;
+      boklukmana += 2;
       myEndTurn = true;
-    } else {
-      alert("Not enough mana.");
     }
   }
 }

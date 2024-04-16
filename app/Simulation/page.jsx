@@ -1,5 +1,5 @@
 import Image from "next/image";
-import img1 from "@/public/kostenurka.png";
+import img1 from "@/public/game.png";
 const game = () => {
   return (
     <div>
