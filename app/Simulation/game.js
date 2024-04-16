@@ -155,6 +155,9 @@ for (var k = 0; k <= 12; k++) {
 }
 function update() {
   boklukY += dfloat;
+  if (horizon) {
+    console.log("meow");
+  }
   if (boklukY <= 200) {
     dfloat += 0.01;
   } else if (boklukY >= 220) {
