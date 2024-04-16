@@ -2,8 +2,17 @@ let map_of_the_world = tryToLoad("map_of_the_world", "black");
 let pin = tryToLoad("pin", "red");
 let pins = [];
 let sunR = 100;
+let Win = false;
+let Lose = false;
+let net = tryToLoad("net", "white");
 let life = 100;
+let myTurn = false;
+let myEndTurn = false;
+let boklukTurn = false;
+let boklukEndTurn = false;
 let bokluklife = 100;
+let mana = 100;
+let boklukmana = 100;
 let fishX = 10;
 let fishDirection = 1;
 let randSpeed = randomInteger(5) + 1;
@@ -159,8 +168,14 @@ for (var k = 0; k <= 12; k++) {
 }
 function update() {
   boklukY += dfloat;
-  if (horizon) {
-    console.log("meow");
+  if (bokluklife <= 0) {
+    bokluklife = 0;
+    Win = true;
+    Lose = false;
+  } else if (life <= 0) {
+    life = 0;
+    Win = false;
+    Lose = true;
   }
   if (boklukY <= 200) {
     dfloat += 0.01;
@@ -183,6 +198,20 @@ function update() {
     fishDirection = 1;
   } else if (fishX >= 880) {
     fishDirection = 0;
+  }
+  if (Lose) {
+    alert("You are dead.");
+    alert("Try again with refreshing the tab.");
+  }
+  if (boklukBattle) {
+    myTurn = true;
+    if (myEndTurn) {
+      boklukTurn = true;
+      myTurn = false;
+    } else if (boklukEndTurn) {
+      boklukTurn = false;
+      myTurn = true;
+    }
   }
 }
 function drawPin(x, y) {
@@ -258,15 +287,19 @@ function draw() {
     for (let i = 0; i <= life; i++) {
       context.fillRect(100 + i * 2, 190, 1, 10);
     }
-    context.fillStyle = "#0099ff";
-    context.fillRect(100, 170, 200, 10);
+    context.fillStyle = "purple";
+    for (let i = 0; i <= mana; i++) {
+      context.fillRect(100 + i * 2, 170, 1, 10);
+    }
     drawGarbage(600, 200, 200, 120);
     context.fillStyle = "#66ff99";
-    for (let i = 0; i <= life; i++) {
+    for (let i = 0; i <= bokluklife; i++) {
       context.fillRect(600 + i * 2, 190, 1, 10);
     }
-    context.fillStyle = "#0099ff";
-    context.fillRect(600, 170, 200, 10);
+    context.fillStyle = "purple";
+    for (let i = 0; i <= boklukmana; i++) {
+      context.fillRect(600 + i * 2, 170, 1, 10);
+    }
     var j = 0;
     for (var i = 1; i <= 6; i++) {
       context.fillStyle = "#ba6e00";
@@ -291,19 +324,37 @@ function draw() {
       }
     }
     context.fillStyle = "black";
-    context.font = "bold 25px cursive";
+    context.font = "bold 15px cursive";
     context.fillText("Net slap", 20, 430, 100);
     context.fillStyle = "red";
     context.fillText("30 dm", 135, 430, 100);
+    context.fillStyle = "purple";
+    context.fillText("40 mana", 135, 445, 100);
     context.fillStyle = "black";
-    context.fillText("one-scoop-style", 235, 430, 100);
+    context.fillText("three-scoop-style", 235, 430, 100);
     context.fillStyle = "red";
     context.fillText("15 dm", 350, 430, 100);
+    context.fillStyle = "purple";
+    context.fillText("20 mana", 350, 445, 100);
+    context.fillStyle = "black";
+    context.fillText("OP Vacuum", 20, 490, 100);
+    context.fillStyle = "red";
+    context.fillText("40 dm", 135, 490, 100);
+    context.fillStyle = "purple";
+    context.fillText("60 mana", 135, 505, 100);
     context.fillStyle = "black";
     context.fillText("VS", 435, 15);
     context.fillStyle = "darkorange";
     context.font = "bold 40px 'Courier New'";
     context.fillText("Battle", 10, 15);
+  }
+  if (Win) {
+    boklukBattle = false;
+    Win = false;
+    mana = 100;
+    boklukmana = 100;
+    life = 100;
+    bokluklife = 100;
   }
   context.fillStyle = "white";
   context.fillRect(900, 0, 300, 1000);
@@ -322,5 +373,35 @@ function mouseup() {
   if (isMouseColliding(300, boklukY, 200, 120) && isBokluk && horizon) {
     boklukBattle = true;
     horizon = false;
+  }
+  if (isMouseColliding(15, 415, 200, 50)) {
+    if (mana >= 40) {
+      console.log("Net Slap");
+      bokluklife -= 30;
+      mana -= 40;
+      myEndTurn = true;
+    } else {
+      alert("Not enough mana.");
+    }
+  }
+  if (isMouseColliding(215, 415, 200, 50)) {
+    if (mana >= 20) {
+      console.log("Three-scoop-style");
+      bokluklife -= 15;
+      mana -= 20;
+      myEndTurn = true;
+    } else {
+      alert("Not enough mana.");
+    }
+  }
+  if (isMouseColliding(15, 485, 200, 50)) {
+    if (mana >= 60) {
+      console.log("OP Vacuum");
+      bokluklife -= 40;
+      mana -= 60;
+      myEndTurn = true;
+    } else {
+      alert("Not enough mana.");
+    }
   }
 }
