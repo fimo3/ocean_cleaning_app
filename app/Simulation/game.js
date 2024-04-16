@@ -1,12 +1,15 @@
 let map_of_the_world = tryToLoad("map_of_the_world", "black");
 let pin = tryToLoad("pin", "red");
 let pins = [];
+let sunR = 100;
+let life = 100;
 let fishX = 10;
 let fishDirection = 1;
 let randSpeed = randomInteger(5) + 1;
 let horizon = false;
 let bokluk = tryToLoad("bokluk", "black");
 let fish = tryToLoad("fish", "blue");
+let fishLeft = tryToLoad("fishLeft", "blue");
 let slash = tryToLoad("slash", "white");
 let boklukY = 190;
 let dfloat = 0.1;
@@ -175,7 +178,7 @@ function update() {
       randSpeed = i;
     }
   }
-  if (fishX <= 0) {
+  if (fishX <= -70) {
     fishDirection = 1;
   } else if (fishX >= 880) {
     fishDirection = 0;
@@ -210,7 +213,6 @@ function draw() {
         pos[pins[k].x][0] + 5,
         pos[pins[k].y][1] + 12
       );
-      console.log("pinMenu");
     } else {
       pinMenu = false;
     }
@@ -227,7 +229,14 @@ function draw() {
     plotSine3(context, step - 200);
     context.restore();
     step += 1;
-    drawFish(fishX, 400, 35, 20);
+    context.fillStyle = "yellow";
+    context.arc(0, 0, sunR, 0, 360);
+
+    if (fishDirection == 1) {
+      drawFish(fishX, 400, 70, 40);
+    } else {
+      drawImage(fishLeft, fishX, 400, 70, 40);
+    }
     drawGarbage(300, boklukY, 200, 120);
   }
   var line = (startX, startY, endX, endY) => {
@@ -245,7 +254,10 @@ function draw() {
     context.fillRect(0, 400, 900, 300);
     drawFish(100, 200, 245, 140);
     context.fillStyle = "#66ff99";
-    context.fillRect(100, 190, 200, 10);
+    for (let i = 0; i <= life; i++) {
+      context.fillRect(100 + i, 190, 20, 10);
+      console.log(i);
+    }
     context.fillStyle = "#0099ff";
     context.fillRect(100, 170, 200, 10);
     drawGarbage(600, 200, 200, 120);
@@ -287,6 +299,9 @@ function draw() {
     context.fillText("15 dm", 350, 430, 100);
     context.fillStyle = "black";
     context.fillText("VS", 435, 15);
+    context.fillStyle = "darkorange";
+    context.font = "bold 40px 'Courier New'";
+    context.fillText("Battle", 10, 15);
   }
   context.fillStyle = "white";
   context.fillRect(900, 0, 300, 1000);
@@ -304,5 +319,6 @@ function mouseup() {
   }
   if (isMouseColliding(300, boklukY, 200, 120) && isBokluk && horizon) {
     boklukBattle = true;
+    horizon = false;
   }
 }
