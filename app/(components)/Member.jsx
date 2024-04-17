@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import img1 from "@/public/kostenurka.png";
+import img1 from "@/public/me.png";
 
 const Member = () => {
   return (

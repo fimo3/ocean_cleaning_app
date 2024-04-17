@@ -1,4 +1,4 @@
-import Donation from "@/app/(models)/Donation";
+import Donation from "../../(models)/Donation";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {

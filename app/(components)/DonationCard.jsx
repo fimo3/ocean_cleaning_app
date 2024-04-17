@@ -2,15 +2,15 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import img1 from "@/public/kostenurka.png";
-const DonationCard = () => {
+import img1 from "@/public/noImage.png";
+const DonationCard = ({ donation }) => {
   return (
     <div className="m-2 text-black rounded-2xl bg-secondary hover:bg-secondary-hover">
       <Image src={img1} alt="Снимка :>" className="p-4 w-auto" />
-      <h2 id="card">Title</h2>
-      <p id="card">Description.......</p>
+      <h2 id="card">{donation.title}</h2>
+      <p id="card">{donation.description}</p>
       <hr />
-      <p id="card">35$ from 60$</p>
+      <p id="card">35$ from {donation.maxMoney}$</p>
       <div
         className="bg-default-text rounded-full h-2.5 m-2"
         style={{ width: "90%" }}
