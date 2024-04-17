@@ -4,7 +4,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const getDonations = async () => {
   try {
-    const res = await fetch("http://localhost:3001/api/Donations", {
+    const res = await fetch("http://localhost:3000/api/Donations", {
       cache: "no-store",
     });
 
@@ -39,7 +39,7 @@ const page = async () => {
               <h2>{uniqueCategory}</h2>
               <div className="lg:grid grid-cols-2 xl:grid-cols-4">
                 {donations
-                  .filter((donation) => donation.category === uniqueCategory)
+                  .filter((donation) => donation.title === uniqueCategory)
                   .map((filteredDonation, _index) => (
                     <DonationCard
                       id={_index}
