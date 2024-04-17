@@ -4,6 +4,9 @@ let pins = [];
 let sunR = 100;
 let Win = false;
 let Lose = false;
+let EndDay = false;
+let UltimateWin = false;
+let Day = 1;
 let turns = 0;
 let boklukStrength = randomInteger(20) * 2;
 let net = tryToLoad("net", "white");
@@ -219,8 +222,13 @@ function update() {
       turns++;
     }
   }
+
+  if (life <= 0) {
+    Lose = true;
+    Win = false;
+  }
   if (boklukTurn) {
-    while (!(boklukmana >= boklukStrength + 15)) {
+    while (boklukmana >= boklukStrength + 15) {
       mana += boklukStrength / 2;
       boklukStrength = randomInteger(10) * 2;
       boklukmana -= boklukStrength + 15;
@@ -229,6 +237,19 @@ function update() {
       boklukTurn = false;
       turns++;
       myTurn = true;
+    }
+    if (Win) {
+      mana = 100;
+      boklukmana = 100;
+      life = 100;
+      bokluklife = 100;
+      boklukBattle = false;
+      Win = false;
+    }
+    if (Day < 7 && EndDay) {
+      EndDay = false;
+    } else if (Day == 7 && EndDay) {
+      UltimateWin = true;
     }
   }
 }
@@ -383,14 +404,6 @@ function draw() {
       context.fillRect(600 + i * 2, 170, 1, 10);
     }
   }
-  if (Win) {
-    boklukBattle = false;
-    Win = false;
-    mana = 100;
-    boklukmana = 100;
-    life = 100;
-    bokluklife = 100;
-  }
   context.fillStyle = "white";
   context.fillRect(900, 0, 300, 1000);
 }
@@ -450,5 +463,10 @@ function mouseup() {
       life -= 3;
       myEndTurn = true;
     }
+  }
+  if (isMouseColliding(100, 0, 100, 25) && Day <= 7) {
+    console.log("End day");
+    EndDay = true;
+    Day++;
   }
 }
