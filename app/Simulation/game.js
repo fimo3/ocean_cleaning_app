@@ -220,18 +220,15 @@ function update() {
     }
   }
   if (boklukTurn) {
-    boklukStrength = randomInteger(10) * 2;
-    if (boklukmana >= boklukStrength + 15) {
+    while (!(boklukmana >= boklukStrength + 15)) {
       mana += boklukStrength / 2;
+      boklukStrength = randomInteger(10) * 2;
       boklukmana -= boklukStrength + 15;
       life -= boklukStrength;
       myEndTurn = false;
-      turns++;
       boklukTurn = false;
+      turns++;
       myTurn = true;
-      console.log(turns);
-    } else {
-      boklukStrength = randomInteger(boklukmana) * 2;
     }
   }
 }
@@ -245,11 +242,15 @@ function draw() {
   drawImage(map_of_the_world, 0, 0, 900, 600);
   context.font = "bold 25px cursive";
   context.fillStyle = "black";
-  context.fillText("Day 1", 0, 0);
+  context.fillText("Day 1", 5, 5);
+  context.fillStyle = "yellow";
+  context.fillRect(100, 0, 100, 25);
+  context.fillStyle = "black";
+  context.font = "bold 20px cursive";
+  context.fillText("End day", 105, 5, 90);
   context.font = "bold 10px cursive";
   for (var k = 0; k <= 12; k++) {
     drawPin(pos[pins[k].x][0], pos[pins[k].y][1]);
-
     if (
       isMouseColliding(pos[pins[k].x][0] - 10, pos[pins[k].y][1] - 30, 20, 30)
     ) {
@@ -303,24 +304,6 @@ function draw() {
     line(450, 0, 450, 400);
     context.fillStyle = "#D3A96C";
     context.fillRect(0, 400, 900, 300);
-    drawFish(100, 200, 245, 140);
-    context.fillStyle = "#66ff99";
-    for (let i = 0; i <= life; i++) {
-      context.fillRect(100 + i * 2, 190, 1, 10);
-    }
-    context.fillStyle = "purple";
-    for (let i = 0; i <= mana; i++) {
-      context.fillRect(100 + i * 2, 170, 1, 10);
-    }
-    drawGarbage(600, 200, 200, 120);
-    context.fillStyle = "#66ff99";
-    for (let i = 0; i <= bokluklife; i++) {
-      context.fillRect(600 + i * 2, 190, 1, 10);
-    }
-    context.fillStyle = "purple";
-    for (let i = 0; i <= boklukmana; i++) {
-      context.fillRect(600 + i * 2, 170, 1, 10);
-    }
     var j = 0;
     for (var i = 1; i <= 6; i++) {
       context.fillStyle = "#ba6e00";
@@ -374,6 +357,31 @@ function draw() {
     context.fillStyle = "darkorange";
     context.font = "bold 40px 'Courier New'";
     context.fillText("Battle", 10, 15);
+    drawFish(100, 200, 245, 140);
+    context.fillStyle = "#66ff99";
+    context.font = "bold 15px cursive";
+    context.fillText(life, 70, 190);
+    for (let i = 0; i <= life; i++) {
+      context.fillRect(100 + i * 2, 190, 1, 10);
+    }
+    context.fillStyle = "purple";
+    context.font = "bold 15px cursive";
+    context.fillText(mana, 70, 170);
+    for (let i = 0; i <= mana; i++) {
+      context.fillRect(100 + i * 2, 170, 1, 10);
+    }
+    drawGarbage(600, 200, 200, 120);
+    context.fillStyle = "#66ff99";
+    context.font = "bold 15px cursive";
+    context.fillText(bokluklife, 570, 190);
+    for (let i = 0; i <= bokluklife; i++) {
+      context.fillRect(600 + i * 2, 190, 1, 10);
+    }
+    context.fillStyle = "purple";
+    context.fillText(boklukmana, 570, 170);
+    for (let i = 0; i <= boklukmana; i++) {
+      context.fillRect(600 + i * 2, 170, 1, 10);
+    }
   }
   if (Win) {
     boklukBattle = false;
@@ -414,7 +422,7 @@ function mouseup() {
       }
     }
     if (isMouseColliding(215, 415, 200, 50)) {
-      if (mana >= 20) {
+      if (mana >= 10) {
         console.log("Three-scoop-style");
         bokluklife -= 10;
         mana -= 10;
@@ -439,6 +447,7 @@ function mouseup() {
       console.log("Cheap attack");
       bokluklife -= 5;
       boklukmana += 2;
+      life -= 3;
       myEndTurn = true;
     }
   }
