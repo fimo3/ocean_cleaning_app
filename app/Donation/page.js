@@ -1,7 +1,7 @@
 import DonationCard from "../(components)/DonationCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-
+import React from "react";
 const getDonations = async () => {
   try {
     const res = await fetch("http://localhost:3000/api/Donations", {
@@ -18,8 +18,8 @@ const getDonations = async () => {
 };
 
 const page = async () => {
-  const { donations } = await getDonations();
-
+  const data = await getDonations();
+  const { donations } = data.donations;
   const uniqueCategories = [
     ...new Set(donations?.map(({ category }) => category)),
   ];
