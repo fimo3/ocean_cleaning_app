@@ -6,7 +6,7 @@ let Win = false;
 let Lose = false;
 let EndDay = false;
 let UltimateWin = false;
-let fishNum = randomInteger(4) + 1;
+let fishNum = randomInteger(5) + 1;
 console.log(fishNum);
 let Day = 1;
 let turns = 0;
@@ -20,15 +20,17 @@ let boklukEndTurn = false;
 let bokluklife = 100;
 let mana = 100;
 let boklukmana = 100;
-let fishX = 10;
+let fishX = [10, 40, 1];
 let fishDirection = 1;
 let randSpeed = randomInteger(5) + 1;
 let horizon = false;
 let bokluk = tryToLoad("bokluk", "black");
 let fish = tryToLoad("fish", "blue");
 let fish2 = tryToLoad("fish2", "red");
+let fish3 = tryToLoad("fish3", "red");
 let fishLeft = tryToLoad("fishLeft", "blue");
-let fishLeft2 = tryToLoad("fishLeft2", "red");
+let fishLeft2 = tryToLoad("fishLeft2", "gray");
+let fishLeft3 = tryToLoad("fishLeft3", "red");
 let oktopod = tryToLoad("oktopod", "red");
 let oktomalyk = tryToLoad("oktomalak", "red");
 let slash = tryToLoad("slash", "white");
@@ -156,7 +158,13 @@ function plotSine3(context, xOffset) {
   context.save();
   context.restore();
 }
-
+var line = (startX, startY, endX, endY) => {
+  context.beginPath();
+  context.moveTo(startX, startY);
+  context.lineTo(endX, endY);
+  context.closePath();
+  context.stroke();
+};
 function spirograph() {
   var canvas = document.getElementById("canvas2");
   var step = 4;
@@ -176,6 +184,8 @@ var drawFish = (fishNum, x, y, w, h) => {
     drawImage(oktopod, x, y, w - w / 2.45, h + h / 1.4);
   } else if (fishNum == 4) {
     drawImage(oktomalyk, x, y, h, h);
+  } else if (fishNum == 5) {
+    drawImage(fish3, x, y, h, h);
   }
 };
 var drawFishLeft = (fishNum, x, y, w, h) => {
@@ -187,6 +197,8 @@ var drawFishLeft = (fishNum, x, y, w, h) => {
     drawImage(oktopod, x, y, w - w / 2.45, h + h / 1.4);
   } else if (fishNum == 4) {
     drawImage(oktomalyk, x, y, h, h);
+  } else if (fishNum == 5) {
+    drawImage(fishLeft3, x, y, h, h);
   }
 };
 let isMouseColliding = (x, y, w, h) => {
@@ -215,22 +227,26 @@ function update() {
   } else if (boklukY >= 220) {
     dfloat -= 0.01;
   }
-  if (fishDirection == 1) {
-    fishX += randSpeed;
-    for (var i = 1; i < 4; i++) {
-      randSpeed = i;
-    }
-  } else {
+  for (let j = 0; j < 3; j++) {
     randSpeed = randomInteger(4) + 1;
-    fishX -= randSpeed;
-    for (var i = 1; i < 4; i++) {
-      randSpeed = i;
+    if (fishDirection == 1) {
+      fishX[j] += randSpeed;
+      for (var i = 1; i < 4; i++) {
+        randSpeed = i;
+      }
+    } else {
+      fishX[j] -= randSpeed;
+      for (var i = 1; i < 4; i++) {
+        randSpeed = i;
+      }
     }
   }
-  if (fishX <= -70) {
-    fishDirection = 1;
-  } else if (fishX >= 880) {
-    fishDirection = 0;
+  for (let j = 0; j < 3; j++) {
+    if (fishX[j] <= -70) {
+      fishDirection = 1;
+    } else if (fishX[j] >= 880) {
+      fishDirection = 0;
+    }
   }
   if (Lose) {
     alert("You are dead.");
@@ -333,19 +349,22 @@ function draw() {
     context.fillStyle = "yellow";
     context.arc(0, 0, sunR, 0, 360);
     if (fishDirection == 1) {
-      drawFish(fishNum, fishX, 400, 70, 40);
+      drawFish(fishNum, fishX[0], 400, 70, 40);
     } else {
-      drawFishLeft(fishNum, fishX, 400, 70, 40);
+      drawFishLeft(fishNum, fishX[0], 400, 70, 40);
+    }
+    if (fishDirection == 1) {
+      drawFish(fishNum, fishX[1], 330, 70, 40);
+    } else {
+      drawFishLeft(fishNum, fishX[1], 330, 70, 40);
+    }
+    if (fishDirection == 1) {
+      drawFish(fishNum, fishX[2], 480, 70, 40);
+    } else {
+      drawFishLeft(fishNum, fishX[2], 480, 70, 40);
     }
     drawGarbage(300, boklukY, 200, 120);
   }
-  var line = (startX, startY, endX, endY) => {
-    context.beginPath();
-    context.moveTo(startX, startY);
-    context.lineTo(endX, endY);
-    context.closePath();
-    context.stroke();
-  };
   if (boklukBattle) {
     context.fillStyle = "#92d3ed";
     context.fillRect(0, 0, 900, 600);
