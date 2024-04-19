@@ -6,6 +6,8 @@ let Win = false;
 let Lose = false;
 let EndDay = false;
 let UltimateWin = false;
+let fishNum = randomInteger(4) + 1;
+console.log(fishNum);
 let Day = 1;
 let turns = 0;
 let boklukStrength = randomInteger(20) * 2;
@@ -24,7 +26,11 @@ let randSpeed = randomInteger(5) + 1;
 let horizon = false;
 let bokluk = tryToLoad("bokluk", "black");
 let fish = tryToLoad("fish", "blue");
+let fish2 = tryToLoad("fish2", "red");
 let fishLeft = tryToLoad("fishLeft", "blue");
+let fishLeft2 = tryToLoad("fishLeft2", "red");
+let oktopod = tryToLoad("oktopod", "red");
+let oktomalyk = tryToLoad("oktomalak", "red");
 let slash = tryToLoad("slash", "white");
 let boklukY = 190;
 let dfloat = 0.1;
@@ -161,8 +167,27 @@ function spirograph() {
   }
 }
 var step = -4;
-var drawFish = (x, y, w, h) => {
-  drawImage(fish, x, y, w, h);
+var drawFish = (fishNum, x, y, w, h) => {
+  if (fishNum == 1) {
+    drawImage(fish, x, y, w, h);
+  } else if (fishNum == 2) {
+    drawImage(fish2, x, y, w, h);
+  } else if (fishNum == 3) {
+    drawImage(oktopod, x, y, w - w / 2.45, h + h / 1.4);
+  } else if (fishNum == 4) {
+    drawImage(oktomalyk, x, y, h, h);
+  }
+};
+var drawFishLeft = (fishNum, x, y, w, h) => {
+  if (fishNum == 1) {
+    drawImage(fishLeft, x, y, w, h);
+  } else if (fishNum == 2) {
+    drawImage(fishLeft2, x, y, w, h);
+  } else if (fishNum == 3) {
+    drawImage(oktopod, x, y, w - w / 2.45, h + h / 1.4);
+  } else if (fishNum == 4) {
+    drawImage(oktomalyk, x, y, h, h);
+  }
 };
 let isMouseColliding = (x, y, w, h) => {
   return areColliding(mouseX, mouseY, 1, 1, x, y, w, h);
@@ -181,6 +206,9 @@ function update() {
     life = 0;
     Win = false;
     Lose = true;
+  }
+  if (boklukmana <= 0) {
+    boklukmana = 0;
   }
   if (boklukY <= 200) {
     dfloat += 0.01;
@@ -304,11 +332,10 @@ function draw() {
     step += 1;
     context.fillStyle = "yellow";
     context.arc(0, 0, sunR, 0, 360);
-
     if (fishDirection == 1) {
-      drawFish(fishX, 400, 70, 40);
+      drawFish(fishNum, fishX, 400, 70, 40);
     } else {
-      drawImage(fishLeft, fishX, 400, 70, 40);
+      drawFishLeft(fishNum, fishX, 400, 70, 40);
     }
     drawGarbage(300, boklukY, 200, 120);
   }
@@ -378,7 +405,7 @@ function draw() {
     context.fillStyle = "darkorange";
     context.font = "bold 40px 'Courier New'";
     context.fillText("Battle", 10, 15);
-    drawFish(100, 200, 245, 140);
+    drawFish(fishNum, 100, 200, 245, 140);
     context.fillStyle = "#66ff99";
     context.font = "bold 15px cursive";
     context.fillText(life, 70, 190);
@@ -418,9 +445,18 @@ function mouseup() {
       horizon = true;
     }
   }
-  if (isMouseColliding(300, boklukY, 200, 120) && isBokluk && horizon) {
+  if (
+    boklukBattle == false &&
+    isMouseColliding(300, boklukY, 200, 120) &&
+    isBokluk &&
+    horizon
+  ) {
     boklukBattle = true;
     horizon = false;
+    life = 100;
+    mana = 100;
+    bokluklife = 100;
+    boklukmana = 100;
   }
   if (boklukBattle) {
     if (isMouseColliding(15, 415, 200, 50)) {
