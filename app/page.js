@@ -30,11 +30,7 @@ const Dashboard = () => {
             </p>
           </a>
         </div>
-        <Image
-          src={img1}
-          alt="Снимка :>"
-          className="p-4 size-1/3 shadow-black shadow-lg"
-        />
+        <Image src={img1} alt="Снимка :>" className="p-4 size-1/3" />
       </div>
       <hr className="text-bluey" />
       <h2>Most recent blog entry: </h2>
