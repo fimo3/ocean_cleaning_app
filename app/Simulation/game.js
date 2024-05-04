@@ -397,7 +397,8 @@ function draw() {
       } else {
         drawFishLeft(fishNum, fishX[o], fishY[o], 70, 40);
       }
-    } /*
+    }
+    /*
     if (fishDirection == 1) {
       drawFish(fishNum, fishX[1], 330, 70, 40);
     } else {
