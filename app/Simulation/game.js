@@ -1,3 +1,11 @@
+class Sea {
+  name = " ";
+  description = " ";
+  x = 0;
+  y = 0;
+  brBokluk = 1;
+  brRibi = 3;
+}
 let map_of_the_world = tryToLoad("map_of_the_world", "black");
 let pin = tryToLoad("pin", "red");
 let pins = [];
@@ -21,6 +29,7 @@ let bokluklife = 100;
 let mana = 100;
 let boklukmana = 100;
 let fishX = [10, 40, 1];
+let fishY = [400, 330, 480];
 let fishDirection = 1;
 let randSpeed = randomInteger(5) + 1;
 let horizon = false;
@@ -53,10 +62,36 @@ let pos = [
   [450, 210], //yes
   [100, 400], //yes
 ];
+let names = [
+  "North Pacific Ocean",
+  "Arctic Ocean",
+  "Black Sea",
+  "South Atlantic Ocean",
+  "North Atlantic Ocean",
+  "Indian Ocean",
+  "Hudson Bay",
+  "Scandinavian Sea",
+  "Pacific Ocean",
+  "Caspean Sea",
+  "Mediteranian Sea",
+  "South Pacific Ocean",
+];
+let sealocations = [];
 let rand = randomInteger(12);
-class Hocation {
+class RandLocation {
   x = rand;
   y = rand;
+}
+
+for (var k = 0; k <= 12; k++) {
+  pins[k] = new RandLocation();
+  rand = randomInteger(12);
+}
+for (let i = 0; i <= 12; i++) {
+  sealocations[i] = new Sea();
+  sealocations[i].x = pos[pins[i].x][0];
+  sealocations[i].y = pos[pins[i].y][1];
+  sealocations[i].name = names[pins[i].x];
 }
 let drawX = (x, y, w, h) => {
   context.fillStyle = "red";
@@ -204,10 +239,6 @@ var drawFishLeft = (fishNum, x, y, w, h) => {
 let isMouseColliding = (x, y, w, h) => {
   return areColliding(mouseX, mouseY, 1, 1, x, y, w, h);
 };
-for (var k = 0; k <= 12; k++) {
-  pins[k] = new Hocation();
-  rand = randomInteger(12);
-}
 function update() {
   boklukY += dfloat;
   if (bokluklife <= 0) {
@@ -226,6 +257,13 @@ function update() {
     dfloat += 0.01;
   } else if (boklukY >= 220) {
     dfloat -= 0.01;
+  }
+  for (let i = 0; i <= 12; i++) {
+    if (sealocations[i].brBokluk > 0) {
+      sealocations[i].description = "has garbage";
+    } else {
+      sealocations[i].description = "doesn't have garbage";
+    }
   }
   for (let j = 0; j < 3; j++) {
     randSpeed = randomInteger(4) + 1;
@@ -303,6 +341,7 @@ function drawPin(x, y) {
 function drawGarbage(x, y, w, h) {
   drawImage(bokluk, x, y, w, h);
 }
+let drawHorizonFish = () => {};
 function draw() {
   drawImage(map_of_the_world, 0, 0, 900, 600);
   context.font = "bold 25px cursive";
@@ -324,11 +363,15 @@ function draw() {
       context.strokeStyle = "#ad5700";
       context.strokeRect(pos[pins[k].x][0], pos[pins[k].y][1], 200, 155);
       context.fillStyle = "black";
-      context.fillText("Pin", pos[pins[k].x][0] + 5, pos[pins[k].y][1] + 5);
       context.fillText(
-        "has garbage",
+        sealocations[k].name,
         pos[pins[k].x][0] + 5,
-        pos[pins[k].y][1] + 12
+        pos[pins[k].y][1] + 5
+      );
+      context.fillText(
+        sealocations[k].description,
+        pos[pins[k].x][0] + 5,
+        pos[pins[k].y][1] + 15
       );
     } else {
       pinMenu = false;
@@ -348,11 +391,13 @@ function draw() {
     step += 1;
     context.fillStyle = "yellow";
     context.arc(0, 0, sunR, 0, 360);
-    if (fishDirection == 1) {
-      drawFish(fishNum, fishX[0], 400, 70, 40);
-    } else {
-      drawFishLeft(fishNum, fishX[0], 400, 70, 40);
-    }
+    for (let o = 0; o < 3; o++) {
+      if (fishDirection == 1) {
+        drawFish(fishNum, fishX[o], fishY[o], 70, 40);
+      } else {
+        drawFishLeft(fishNum, fishX[o], fishY[o], 70, 40);
+      }
+    } /*
     if (fishDirection == 1) {
       drawFish(fishNum, fishX[1], 330, 70, 40);
     } else {
@@ -362,7 +407,7 @@ function draw() {
       drawFish(fishNum, fishX[2], 480, 70, 40);
     } else {
       drawFishLeft(fishNum, fishX[2], 480, 70, 40);
-    }
+    }*/
     drawGarbage(300, boklukY, 200, 120);
   }
   if (boklukBattle) {
@@ -515,7 +560,7 @@ function mouseup() {
       console.log("Cheap attack");
       bokluklife -= 5;
       boklukmana += 2;
-      life -= 3;
+      life -= 2;
       myEndTurn = true;
     }
   }
