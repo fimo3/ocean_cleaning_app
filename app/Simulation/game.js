@@ -48,7 +48,8 @@ let dfloat = 0.1;
 let pinMenu = false;
 let boklukBattle = false;
 let isBokluk = true;
-let pos = [
+let horizonID;
+const pos = [
   [50, 250], //yes
   [500, 50], //yes
   [510, 200], //yes
@@ -62,7 +63,7 @@ let pos = [
   [450, 210], //yes
   [100, 400], //yes
 ];
-let names = [
+const names = [
   "North Pacific Ocean",
   "Arctic Ocean",
   "Black Sea",
@@ -195,6 +196,7 @@ function plotSine3(context, xOffset) {
 }
 var line = (startX, startY, endX, endY) => {
   context.beginPath();
+  context.arc(startX, startY, 5, 0, 2 * Math.PI);
   context.moveTo(startX, startY);
   context.lineTo(endX, endY);
   context.closePath();
@@ -259,6 +261,9 @@ function update() {
     dfloat -= 0.01;
   }
   for (let i = 0; i <= 12; i++) {
+    if (sealocations[i].brBokluk <= 0) {
+      boklukBattle = false;
+    }
     if (sealocations[i].brBokluk > 0) {
       sealocations[i].description = "has garbage";
     } else {
@@ -376,12 +381,25 @@ function draw() {
     } else {
       pinMenu = false;
     }
+    context.fillStyle = "black";
   }
   if (horizon) {
     context.fillStyle = "#92d3ed";
     context.fillRect(0, 0, 900, 600);
     context.fillStyle = "#0033cc";
     context.fillRect(0, 300, 900, 300);
+    context.fillStyle = "#FFDF00";
+    context.beginPath();
+    context.arc(0, 0, sunR, 0, 2 * Math.PI);
+    context.fill();
+    context.beginPath();
+    context.strokeStyle = "#FFDF00";
+    line(65, 65, 200, 200);
+    line(12.5, 37.5, 95, 275);
+    line(37.5, 12.5, 275, 95);
+    context.fillStyle = "black";
+    context.font = "bold 48px cursive";
+    context.fillText(sealocations[horizonID].name, 200, 10);
     drawX(0, 0, 50, 50);
     context.save();
     plotSine(context, step);
@@ -389,8 +407,6 @@ function draw() {
     plotSine3(context, step - 200);
     context.restore();
     step += 1;
-    context.fillStyle = "yellow";
-    context.arc(0, 0, sunR, 0, 360);
     for (let o = 0; o < 3; o++) {
       if (fishDirection == 1) {
         drawFish(fishNum, fishX[o], fishY[o], 70, 40);
@@ -410,8 +426,14 @@ function draw() {
       drawFishLeft(fishNum, fishX[2], 480, 70, 40);
     }*/
     drawGarbage(300, boklukY, 200, 120);
+    if (pos[pins[horizonID].x][0] == 500 && pos[pins[horizonID].y][1] == 50) {
+      context.fillStyle = "#b9e8ea";
+      context.fillRect(20, boklukY, 100, 100);
+      context.fillStyle = "black";
+    }
   }
   if (boklukBattle) {
+    context.strokeStyle = "black";
     context.fillStyle = "#92d3ed";
     context.fillRect(0, 0, 900, 600);
     line(450, 0, 450, 400);
@@ -440,6 +462,7 @@ function draw() {
         context.fillRect(j * 215 - 180, 545, 200, 50);
       }
     }
+    context.strokeStyle = "black";
     context.fillStyle = "black";
     context.font = "bold 15px cursive";
     context.fillText("Net slap", 20, 430, 100);
@@ -466,35 +489,44 @@ function draw() {
     context.fillStyle = "purple";
     context.fillText("0 mana", 350, 505, 100);
     context.fillStyle = "black";
+    context.strokeStyle = "black";
+    context.font = "bold 40px cursive";
     context.fillText("VS", 435, 15);
     context.fillStyle = "darkorange";
-    context.font = "bold 40px 'Courier New'";
     context.fillText("Battle", 10, 15);
     drawFish(fishNum, 100, 200, 245, 140);
-    context.fillStyle = "#66ff99";
+    context.fillStyle = "#2C7B31";
+    context.strokeStyle = "#2C7B31";
     context.font = "bold 15px cursive";
     context.fillText(life, 70, 190);
     for (let i = 0; i <= life; i++) {
       context.fillRect(100 + i * 2, 190, 1, 10);
     }
+    context.strokeRect(100, 190, 200, 10);
     context.fillStyle = "purple";
+    context.strokeStyle = "purple";
     context.font = "bold 15px cursive";
     context.fillText(mana, 70, 170);
     for (let i = 0; i <= mana; i++) {
       context.fillRect(100 + i * 2, 170, 1, 10);
     }
+    context.strokeRect(100, 170, 200, 10);
     drawGarbage(600, 200, 200, 120);
-    context.fillStyle = "#66ff99";
+    context.fillStyle = "#2C7B31";
+    context.strokeStyle = "#2C7B31";
     context.font = "bold 15px cursive";
     context.fillText(bokluklife, 570, 190);
     for (let i = 0; i <= bokluklife; i++) {
       context.fillRect(600 + i * 2, 190, 1, 10);
     }
+    context.strokeRect(600, 190, 200, 10);
     context.fillStyle = "purple";
+    context.strokeStyle = "purple";
     context.fillText(boklukmana, 570, 170);
     for (let i = 0; i <= boklukmana; i++) {
       context.fillRect(600 + i * 2, 170, 1, 10);
     }
+    context.strokeRect(600, 170, 200, 10);
   }
   context.fillStyle = "white";
   context.fillRect(900, 0, 300, 1000);
@@ -508,6 +540,8 @@ function mouseup() {
       isMouseColliding(pos[pins[k].x][0] - 10, pos[pins[k].y][1] - 30, 20, 30)
     ) {
       horizon = true;
+      horizonID = k;
+      //
     }
   }
   if (
