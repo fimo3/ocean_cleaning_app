@@ -5,11 +5,11 @@ const BlogPage = () => {
   return (
     <div className="xl:flex">
       <div className="w-2/3">
-        <Image src={img1} alt="Снимка :>" className=" float-left xl:flex " />
+        <Image src={img1} alt="Снимка :>" className="float-left xl:flex" />
       </div>
-      <div>
-        <h1>etxt</h1>
-        <p>etxt</p>
+      <div className="bg-secondary w-1/3">
+        <h1 id="card">etxt</h1>
+        <p id="card">etxt</p>
       </div>
     </div>
   );
