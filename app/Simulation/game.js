@@ -218,6 +218,8 @@ function update() {
       sealocations[i].description = "has garbage";
     } else {
       sealocations[i].description = "doesn't have garbage";
+    }
+  }
   if (fishDirection == 1) {
     fishX += randSpeed;
     for (var i = 1; i < 4; i++) {
@@ -230,60 +232,61 @@ function update() {
       randSpeed = i;
     }
   }
-  if (fishX <= -70) {
-    fishDirection = 1;
-  } else if (fishX >= 880) {
-    fishDirection = 0;
-  }
-  if (Lose) {
-    alert("You are dead.");
-    alert("Try again with refreshing the tab.");
-  }
-  if (boklukBattle) {
+}
+if (fishX <= -70) {
+  fishDirection = 1;
+} else if (fishX >= 880) {
+  fishDirection = 0;
+}
+if (Lose) {
+  alert("You are dead.");
+  alert("Try again with refreshing the tab.");
+}
+if (boklukBattle) {
+  myTurn = true;
+  if (myEndTurn) {
+    boklukTurn = true;
+    boklukEndTurn = false;
+    myTurn = false;
+    turns++;
+  } else if (boklukEndTurn) {
+    boklukTurn = false;
+    myEndTurn = false;
     myTurn = true;
-    if (myEndTurn) {
-      boklukTurn = true;
-      boklukEndTurn = false;
-      myTurn = false;
-      turns++;
-    } else if (boklukEndTurn) {
-      boklukTurn = false;
-      myEndTurn = false;
-      myTurn = true;
-      turns++;
-    }
-  }
-
-  if (life <= 0) {
-    Lose = true;
-    Win = false;
-  }
-  if (boklukTurn) {
-    while (boklukmana >= boklukStrength + 15) {
-      mana += boklukStrength / 2;
-      boklukStrength = randomInteger(10) * 2;
-      boklukmana -= boklukStrength + 15;
-      life -= boklukStrength;
-      myEndTurn = false;
-      boklukTurn = false;
-      turns++;
-      myTurn = true;
-    }
-    if (Win) {
-      mana = 100;
-      boklukmana = 100;
-      life = 100;
-      bokluklife = 100;
-      boklukBattle = false;
-      Win = false;
-    }
-    if (Day < 7 && EndDay) {
-      EndDay = false;
-    } else if (Day == 7 && EndDay) {
-      UltimateWin = true;
-    }
+    turns++;
   }
 }
+
+if (life <= 0) {
+  Lose = true;
+  Win = false;
+}
+if (boklukTurn) {
+  while (boklukmana >= boklukStrength + 15) {
+    mana += boklukStrength / 2;
+    boklukStrength = randomInteger(10) * 2;
+    boklukmana -= boklukStrength + 15;
+    life -= boklukStrength;
+    myEndTurn = false;
+    boklukTurn = false;
+    turns++;
+    myTurn = true;
+  }
+  if (Win) {
+    mana = 100;
+    boklukmana = 100;
+    life = 100;
+    bokluklife = 100;
+    boklukBattle = false;
+    Win = false;
+  }
+  if (Day < 7 && EndDay) {
+    EndDay = false;
+  } else if (Day == 7 && EndDay) {
+    UltimateWin = true;
+  }
+}
+
 function drawPin(x, y) {
   drawImage(pin, x - 10, y - 30, 20, 30);
 }
@@ -353,18 +356,18 @@ function draw() {
         drawFishLeft(fishNum, fishX[o], fishY[o], 70, 40);
       }
     }
-    /*
+  }
+  /*
     if (fishDirection == 1) {
       drawFish(fishX, 400, 70, 40);
     } else {
       drawImage(fishLeft, fishX, 400, 70, 40);
-    }
-    drawGarbage(300, boklukY, 200, 120);
-    if (pos[pins[horizonID].x][0] == 500 && pos[pins[horizonID].y][1] == 50) {
-      context.fillStyle = "#b9e8ea";
-      context.fillRect(20, boklukY, 100, 100);
-      context.fillStyle = "black";
-    }
+    }*/
+  drawGarbage(300, boklukY, 200, 120);
+  if (pos[pins[horizonID].x][0] == 500 && pos[pins[horizonID].y][1] == 50) {
+    context.fillStyle = "#b9e8ea";
+    context.fillRect(20, boklukY, 100, 100);
+    context.fillStyle = "black";
   }
   var line = (startX, startY, endX, endY) => {
     context.beginPath();
