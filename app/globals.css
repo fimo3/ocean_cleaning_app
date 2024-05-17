@@ -24,7 +24,8 @@ h1,
 h2,
 h3,
 h4,
-p {
+p,
+label {
   @apply font-bold text-black p-2;
 }
 h1#card,
