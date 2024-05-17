@@ -3,6 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleDollarToSlot,
   faGamepad,
+  faPhone,
+  faPhoneAlt,
+  faPhoneSlash,
   faShoppingCart,
   faSquareRss,
   faUserAlt,
@@ -12,6 +15,7 @@ import Tooltip from "./Tooltip";
 import Image from "next/image";
 import UserPicture from "@/public/logo.png";
 import TooltipLastChild from "./TooltipLastChild";
+import { faPhoenixFramework } from "@fortawesome/free-brands-svg-icons";
 const Nav = () => {
   return (
     <nav className=" bg-secondary ">
@@ -26,11 +30,6 @@ const Nav = () => {
               />
             </Tooltip>
           </Link>
-          <Link href="../../Simulation">
-            <Tooltip message={"Game"}>
-              <FontAwesomeIcon icon={faGamepad} />
-            </Tooltip>
-          </Link>
           <Link href="../../Blog">
             <Tooltip message={"Blog"}>
               <FontAwesomeIcon icon={faSquareRss} />
@@ -41,22 +40,22 @@ const Nav = () => {
               <FontAwesomeIcon icon={faShoppingCart} />
             </Tooltip>
           </Link>
-          <Link href="../../Aboutus">
-            <Tooltip message={"About us"}>
-              <FontAwesomeIcon icon={faUsers} />
-            </Tooltip>
-          </Link>
-        </div>
-        <div className="flex items-center space-x-4">
           <Link href="../../Donation">
             <Tooltip message={"Donate"}>
               <FontAwesomeIcon icon={faCircleDollarToSlot} />
             </Tooltip>
           </Link>
+        </div>
+        <div className="flex items-center space-x-4">
+          <Link href="../../Contact">
+            <Tooltip message={"Contact"}>
+              <FontAwesomeIcon icon={faPhone} />
+            </Tooltip>
+          </Link>
           <Link href="../../Profile">
-            <TooltipLastChild message={"User"}>
+            <Tooltip message={"User"}>
               <FontAwesomeIcon icon={faUserAlt} />
-            </TooltipLastChild>
+            </Tooltip>
           </Link>
         </div>
       </div>
