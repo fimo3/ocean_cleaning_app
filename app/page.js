@@ -24,13 +24,12 @@ const Dashboard = () => {
             serious climate catastrophes of our time and try to save the water
             on earth from total pollution for 7 days.
           </h4>
-          <a href="/Aboutus" className="inline-block">
-            <p className=" text-bluey hover:text-bluey-hover">
-              Learn more about us ➡️
-            </p>
-          </a>
         </div>
-        <Image src={img1} alt="Снимка :>" className="p-4 size-1/3" />
+        <Image
+          src={img1}
+          alt="Снимка :>"
+          className="size-1/3 border-8 border-bluey m-4 rounded-md"
+        />
       </div>
       <hr className="text-bluey" />
       <h2>Most recent blog entry: </h2>
